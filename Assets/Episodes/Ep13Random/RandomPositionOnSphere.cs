@@ -16,7 +16,7 @@ public class RandomPositionOnSphere : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Random.seed = Seed;
+		//Random.seed = Seed;
 
 		foreach (GameObject cu in GameObject.FindGameObjectsWithTag("Cube"))
 		{
