@@ -11,9 +11,18 @@ namespace UnityStandardAssets.Cameras
         // target (so that it zooms in as the target becomes further away).
         // When used with a follow cam, it will automatically use the same target.
 
-        [SerializeField] private float m_FovAdjustTime = 1;             // the time taken to adjust the current FOV to the desired target FOV amount.
-        [SerializeField] private float m_ZoomAmountMultiplier = 2;      // a multiplier for the FOV amount. The default of 2 makes the field of view twice as wide as required to fit the target.
-        [SerializeField] private bool m_IncludeEffectsInSize = false;   // changing this only takes effect on startup, or when new target is assigned.
+        [SerializeField]
+        private float m_FovAdjustTime = 1; // the time taken to adjust the current FOV to the desired target FOV amount.
+
+        [SerializeField]
+        private float
+            m_ZoomAmountMultiplier =
+                2; // a multiplier for the FOV amount. The default of 2 makes the field of view twice as wide as required to fit the target.
+
+        [SerializeField]
+        private bool
+            m_IncludeEffectsInSize =
+                false; // changing this only takes effect on startup, or when new target is assigned.
 
         private float m_BoundSize;
         private float m_FovAdjustVelocity;
@@ -35,9 +44,10 @@ namespace UnityStandardAssets.Cameras
         {
             // calculate the correct field of view to fit the bounds size at the current distance
             float dist = (m_Target.position - transform.position).magnitude;
-            float requiredFOV = Mathf.Atan2(m_BoundSize, dist)*Mathf.Rad2Deg*m_ZoomAmountMultiplier;
+            float requiredFOV = Mathf.Atan2(m_BoundSize, dist) * Mathf.Rad2Deg * m_ZoomAmountMultiplier;
 
-            m_Cam.fieldOfView = Mathf.SmoothDamp(m_Cam.fieldOfView, requiredFOV, ref m_FovAdjustVelocity, m_FovAdjustTime);
+            m_Cam.fieldOfView =
+                Mathf.SmoothDamp(m_Cam.fieldOfView, requiredFOV, ref m_FovAdjustVelocity, m_FovAdjustTime);
         }
 
 
@@ -72,6 +82,7 @@ namespace UnityStandardAssets.Cameras
                     }
                 }
             }
+
             float max = Mathf.Max(bounds.extents.x, bounds.extents.y, bounds.extents.z);
             return max;
         }

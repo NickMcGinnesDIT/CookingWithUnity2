@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace UnityStandardAssets.Utility
@@ -28,7 +29,7 @@ namespace UnityStandardAssets.Utility
 				foreach(var r in renderers)
 				{
 					Material[] modifiedMaterials = null;
-					for(int n=0; n<r.sharedMaterials.Length; ++n)
+					for(int n = 0; n<r.sharedMaterials.Length; ++n)
 					{
 						var material = r.sharedMaterials[n];
 						if (material.shader == replacementDef.original)
@@ -58,7 +59,7 @@ namespace UnityStandardAssets.Utility
 			}
 			Debug.Log (materialInstancesReplaced+" material instances replaced");
 			Debug.Log (materialsReplaced+" materials replaced");
-			for(int n=0; n<oldMaterials.Count; ++n)
+			for(int n = 0; n<oldMaterials.Count; ++n)
 			{
 				Debug.Log (oldMaterials[n].name+" ("+oldMaterials[n].shader.name+")"+" replaced with "+newMaterials[n].name+" ("+newMaterials[n].shader.name+")");
 			}
@@ -84,7 +85,7 @@ namespace UnityStandardAssets.Utility
 namespace UnityStandardAssets.Utility.Inspector
 {
 #if UNITY_EDITOR
-    [CustomPropertyDrawer(typeof (AutoMobileShaderSwitch.ReplacementList))]
+    [CustomPropertyDrawer(typeof(AutoMobileShaderSwitch.ReplacementList))]
     public class ReplacementListDrawer : PropertyDrawer
     {
         const float k_LineHeight = 18;
@@ -117,7 +118,7 @@ namespace UnityStandardAssets.Utility.Inspector
                     float rowX = x;
                     for (int n = 0; n < props.Length; ++n)
                     {
-                        float w = widths[n]*inspectorWidth;
+                        float w = widths[n] * inspectorWidth;
 
                         // Calculate rects
                         Rect rect = new Rect(rowX, y, w, lineHeight);
@@ -146,12 +147,14 @@ namespace UnityStandardAssets.Utility.Inspector
                                             {
                                                 items.MoveArrayElement(i, i + 1);
                                             }
+
                                             break;
                                         case "^":
                                             if (i < items.arraySize - 1)
                                             {
                                                 items.MoveArrayElement(i, i - 1);
                                             }
+
                                             break;
                                     }
                                 }
@@ -173,8 +176,8 @@ namespace UnityStandardAssets.Utility.Inspector
             }
 
             // add button
-            var addButtonRect = new Rect((x + position.width) - widths[widths.Length - 1]*inspectorWidth, y,
-                                         widths[widths.Length - 1]*inspectorWidth, lineHeight);
+            var addButtonRect = new Rect((x + position.width) - widths[widths.Length - 1] * inspectorWidth, y,
+                widths[widths.Length - 1] * inspectorWidth, lineHeight);
             if (GUI.Button(addButtonRect, "+"))
             {
                 items.InsertArrayElementAtIndex(items.arraySize);
@@ -192,7 +195,7 @@ namespace UnityStandardAssets.Utility.Inspector
         {
             SerializedProperty items = property.FindPropertyRelative("items");
             float lineAndSpace = k_LineHeight + k_Spacing;
-            return 40 + (items.arraySize*lineAndSpace) + lineAndSpace;
+            return 40 + (items.arraySize * lineAndSpace) + lineAndSpace;
         }
     }
 #endif

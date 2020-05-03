@@ -23,8 +23,12 @@ namespace UnityStandardAssets.Water
         public LayerMask refractLayers = -1;
 
 
-        private Dictionary<Camera, Camera> m_ReflectionCameras = new Dictionary<Camera, Camera>(); // Camera -> Camera table
-        private Dictionary<Camera, Camera> m_RefractionCameras = new Dictionary<Camera, Camera>(); // Camera -> Camera table
+        private Dictionary<Camera, Camera>
+            m_ReflectionCameras = new Dictionary<Camera, Camera>(); // Camera -> Camera table
+
+        private Dictionary<Camera, Camera>
+            m_RefractionCameras = new Dictionary<Camera, Camera>(); // Camera -> Camera table
+
         private RenderTexture m_ReflectionTexture;
         private RenderTexture m_RefractionTexture;
         private WaterMode m_HardwareWaterSupport = WaterMode.Refractive;
@@ -56,6 +60,7 @@ namespace UnityStandardAssets.Water
             {
                 return;
             }
+
             s_InsideWater = true;
 
             // Actual water rendering mode depends on both the current setting AND
@@ -99,10 +104,10 @@ namespace UnityStandardAssets.Water
                 Vector4 clipPlane = CameraSpacePlane(reflectionCamera, pos, normal, 1.0f);
                 reflectionCamera.projectionMatrix = cam.CalculateObliqueMatrix(clipPlane);
 
-				// Set custom culling matrix from the current camera
-				reflectionCamera.cullingMatrix = cam.projectionMatrix * cam.worldToCameraMatrix;
+                // Set custom culling matrix from the current camera
+                reflectionCamera.cullingMatrix = cam.projectionMatrix * cam.worldToCameraMatrix;
 
-				reflectionCamera.cullingMask = ~(1 << 4) & reflectLayers.value; // never render water layer
+                reflectionCamera.cullingMask = ~(1 << 4) & reflectLayers.value; // never render water layer
                 reflectionCamera.targetTexture = m_ReflectionTexture;
                 bool oldCulling = GL.invertCulling;
                 GL.invertCulling = !oldCulling;
@@ -125,10 +130,10 @@ namespace UnityStandardAssets.Water
                 Vector4 clipPlane = CameraSpacePlane(refractionCamera, pos, normal, -1.0f);
                 refractionCamera.projectionMatrix = cam.CalculateObliqueMatrix(clipPlane);
 
-				// Set custom culling matrix from the current camera
-				refractionCamera.cullingMatrix = cam.projectionMatrix * cam.worldToCameraMatrix;
+                // Set custom culling matrix from the current camera
+                refractionCamera.cullingMatrix = cam.projectionMatrix * cam.worldToCameraMatrix;
 
-				refractionCamera.cullingMask = ~(1 << 4) & refractLayers.value; // never render water layer
+                refractionCamera.cullingMask = ~(1 << 4) & refractLayers.value; // never render water layer
                 refractionCamera.targetTexture = m_RefractionTexture;
                 refractionCamera.transform.position = cam.transform.position;
                 refractionCamera.transform.rotation = cam.transform.rotation;
@@ -174,20 +179,24 @@ namespace UnityStandardAssets.Water
                 DestroyImmediate(m_ReflectionTexture);
                 m_ReflectionTexture = null;
             }
+
             if (m_RefractionTexture)
             {
                 DestroyImmediate(m_RefractionTexture);
                 m_RefractionTexture = null;
             }
+
             foreach (var kvp in m_ReflectionCameras)
             {
                 DestroyImmediate((kvp.Value).gameObject);
             }
+
             m_ReflectionCameras.Clear();
             foreach (var kvp in m_RefractionCameras)
             {
                 DestroyImmediate((kvp.Value).gameObject);
             }
+
             m_RefractionCameras.Clear();
         }
 
@@ -200,6 +209,7 @@ namespace UnityStandardAssets.Water
             {
                 return;
             }
+
             Material mat = GetComponent<Renderer>().sharedMaterial;
             if (!mat)
             {
@@ -213,11 +223,11 @@ namespace UnityStandardAssets.Water
             // Time since level load, and do intermediate calculations with doubles
             double t = Time.timeSinceLevelLoad / 20.0;
             Vector4 offsetClamped = new Vector4(
-                (float)Math.IEEERemainder(waveSpeed.x * waveScale4.x * t, 1.0),
-                (float)Math.IEEERemainder(waveSpeed.y * waveScale4.y * t, 1.0),
-                (float)Math.IEEERemainder(waveSpeed.z * waveScale4.z * t, 1.0),
-                (float)Math.IEEERemainder(waveSpeed.w * waveScale4.w * t, 1.0)
-                );
+                (float) Math.IEEERemainder(waveSpeed.x * waveScale4.x * t, 1.0),
+                (float) Math.IEEERemainder(waveSpeed.y * waveScale4.y * t, 1.0),
+                (float) Math.IEEERemainder(waveSpeed.z * waveScale4.z * t, 1.0),
+                (float) Math.IEEERemainder(waveSpeed.w * waveScale4.w * t, 1.0)
+            );
 
             mat.SetVector("_WaveOffset", offsetClamped);
             mat.SetVector("_WaveScale4", waveScale4);
@@ -229,6 +239,7 @@ namespace UnityStandardAssets.Water
             {
                 return;
             }
+
             // set water camera to clear the same way as current camera
             dest.clearFlags = src.clearFlags;
             dest.backgroundColor = src.backgroundColor;
@@ -246,6 +257,7 @@ namespace UnityStandardAssets.Water
                     mysky.material = sky.material;
                 }
             }
+
             // update other values to match current camera.
             // even if we are supplying custom camera&projection matrices,
             // some of values are used elsewhere (e.g. skybox uses far plane)
@@ -275,6 +287,7 @@ namespace UnityStandardAssets.Water
                     {
                         DestroyImmediate(m_ReflectionTexture);
                     }
+
                     m_ReflectionTexture = new RenderTexture(textureSize, textureSize, 16);
                     m_ReflectionTexture.name = "__WaterReflection" + GetInstanceID();
                     m_ReflectionTexture.isPowerOfTwo = true;
@@ -286,7 +299,10 @@ namespace UnityStandardAssets.Water
                 m_ReflectionCameras.TryGetValue(currentCamera, out reflectionCamera);
                 if (!reflectionCamera) // catch both not-in-dictionary and in-dictionary-but-deleted-GO
                 {
-                    GameObject go = new GameObject("Water Refl Camera id" + GetInstanceID() + " for " + currentCamera.GetInstanceID(), typeof(Camera), typeof(Skybox));
+                    GameObject go =
+                        new GameObject(
+                            "Water Refl Camera id" + GetInstanceID() + " for " + currentCamera.GetInstanceID(),
+                            typeof(Camera), typeof(Skybox));
                     reflectionCamera = go.GetComponent<Camera>();
                     reflectionCamera.enabled = false;
                     reflectionCamera.transform.position = transform.position;
@@ -306,6 +322,7 @@ namespace UnityStandardAssets.Water
                     {
                         DestroyImmediate(m_RefractionTexture);
                     }
+
                     m_RefractionTexture = new RenderTexture(textureSize, textureSize, 16);
                     m_RefractionTexture.name = "__WaterRefraction" + GetInstanceID();
                     m_RefractionTexture.isPowerOfTwo = true;
@@ -318,7 +335,8 @@ namespace UnityStandardAssets.Water
                 if (!refractionCamera) // catch both not-in-dictionary and in-dictionary-but-deleted-GO
                 {
                     GameObject go =
-                        new GameObject("Water Refr Camera id" + GetInstanceID() + " for " + currentCamera.GetInstanceID(),
+                        new GameObject(
+                            "Water Refr Camera id" + GetInstanceID() + " for " + currentCamera.GetInstanceID(),
                             typeof(Camera), typeof(Skybox));
                     refractionCamera = go.GetComponent<Camera>();
                     refractionCamera.enabled = false;
@@ -337,6 +355,7 @@ namespace UnityStandardAssets.Water
             {
                 return m_HardwareWaterSupport;
             }
+
             return waterMode;
         }
 
@@ -358,6 +377,7 @@ namespace UnityStandardAssets.Water
             {
                 return WaterMode.Refractive;
             }
+
             if (mode == "Reflective")
             {
                 return WaterMode.Reflective;
@@ -380,19 +400,19 @@ namespace UnityStandardAssets.Water
         static void CalculateReflectionMatrix(ref Matrix4x4 reflectionMat, Vector4 plane)
         {
             reflectionMat.m00 = (1F - 2F * plane[0] * plane[0]);
-            reflectionMat.m01 = (- 2F * plane[0] * plane[1]);
-            reflectionMat.m02 = (- 2F * plane[0] * plane[2]);
-            reflectionMat.m03 = (- 2F * plane[3] * plane[0]);
+            reflectionMat.m01 = (-2F * plane[0] * plane[1]);
+            reflectionMat.m02 = (-2F * plane[0] * plane[2]);
+            reflectionMat.m03 = (-2F * plane[3] * plane[0]);
 
-            reflectionMat.m10 = (- 2F * plane[1] * plane[0]);
+            reflectionMat.m10 = (-2F * plane[1] * plane[0]);
             reflectionMat.m11 = (1F - 2F * plane[1] * plane[1]);
-            reflectionMat.m12 = (- 2F * plane[1] * plane[2]);
-            reflectionMat.m13 = (- 2F * plane[3] * plane[1]);
+            reflectionMat.m12 = (-2F * plane[1] * plane[2]);
+            reflectionMat.m13 = (-2F * plane[3] * plane[1]);
 
-            reflectionMat.m20 = (- 2F * plane[2] * plane[0]);
-            reflectionMat.m21 = (- 2F * plane[2] * plane[1]);
+            reflectionMat.m20 = (-2F * plane[2] * plane[0]);
+            reflectionMat.m21 = (-2F * plane[2] * plane[1]);
             reflectionMat.m22 = (1F - 2F * plane[2] * plane[2]);
-            reflectionMat.m23 = (- 2F * plane[3] * plane[2]);
+            reflectionMat.m23 = (-2F * plane[3] * plane[2]);
 
             reflectionMat.m30 = 0F;
             reflectionMat.m31 = 0F;

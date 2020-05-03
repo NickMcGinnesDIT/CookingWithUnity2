@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class DestroyOnCollide : MonoBehaviour
 {
-	
-	public GameObject DeathAudioSource;
-    
-	private void OnCollisionEnter(Collision collision)
-	{
-		if (DeathAudioSource != null)
-			Instantiate(DeathAudioSource);
-	
-		Destroy(gameObject);
-	}
+    public GameObject DeathAudioSource;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (DeathAudioSource != null)
+            Instantiate(DeathAudioSource);
+
+        Destroy(gameObject);
+    }
 }

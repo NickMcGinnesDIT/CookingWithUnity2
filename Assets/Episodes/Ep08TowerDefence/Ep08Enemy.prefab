@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 4130255122600343514}
   - component: {fileID: 4130255122600343518}
   - component: {fileID: 4130255122600343519}
-  m_Layer: 0
+  - component: {fileID: 162363677080313252}
+  m_Layer: 9
   m_Name: Ep08Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -105,12 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bda830403c5bf843993238b1380a20b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PathPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Speed: 2
+  pathPoints: []
+  speed: 1
   goalSize: 0.1
+  graphicalPathObject: {fileID: 0}
 --- !u!54 &4130255122600343519
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,3 +126,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &162363677080313252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130255122600343513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f733b1e832802a24d94f1c58045f72d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10

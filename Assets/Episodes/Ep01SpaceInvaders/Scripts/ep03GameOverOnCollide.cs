@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ep03GameOverOnCollide : MonoBehaviour
 {
-	private void OnCollisionEnter(Collision collision)
-	{
-		ep03GameManager.GameOver = true;
-	}
+    private void OnCollisionEnter(Collision collision)
+    {
+        ep03GameManager.GameOver = true;
+    }
 }

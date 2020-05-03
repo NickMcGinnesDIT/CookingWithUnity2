@@ -37,12 +37,13 @@ namespace UnityStandardAssets.Utility
         {
             RaycastHit hitInfo;
             if (Physics.Raycast(Parent.transform.position + m_OrigCameraPos, Parent.transform.forward, out hitInfo,
-                                100f))
+                100f))
             {
                 Lookatpoint = hitInfo.point;
                 m_Refocus = true;
                 return;
             }
+
             m_Refocus = false;
         }
 

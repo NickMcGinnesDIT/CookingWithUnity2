@@ -19,8 +19,8 @@ namespace UnityStandardAssets.Water
         {
             serObj.Update();
 
-            GameObject go = ((GerstnerDisplace)serObj.targetObject).gameObject;
-            WaterBase wb = (WaterBase)go.GetComponent(typeof(WaterBase));
+            GameObject go = ((GerstnerDisplace) serObj.targetObject).gameObject;
+            WaterBase wb = (WaterBase) go.GetComponent(typeof(WaterBase));
             Material sharedWaterMaterial = wb.sharedMaterial;
 
             GUILayout.Label("Animates vertices using up 4 generated waves", EditorStyles.miniBoldLabel);

@@ -1,26 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Ep08CreateTowerOnClicked : MonoBehaviour
+namespace Episodes.Ep08TowerDefence
 {
-
-    public GameObject TowerPrefab;
-    
-    // Start is called before the first frame update
-    void Start()
+    public class Ep08CreateTowerOnClicked : MonoBehaviour
     {
+        public GameObject towerPrefab;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Clicked(Vector3 position)
-    {
-        Instantiate(TowerPrefab, position + Vector3.up * 0.5f, Quaternion.identity);
+        public void Clicked(Vector3 position)
+        {
+            Instantiate(towerPrefab, position + Vector3.up * 0.5f, Quaternion.identity);
+        }
     }
 }

@@ -30,21 +30,22 @@ namespace UnityStandardAssets.Water
         {
             serObj.Update();
 
-            waterBase = (WaterBase)serObj.targetObject;
-            oceanBase = ((WaterBase)serObj.targetObject).gameObject;
+            waterBase = (WaterBase) serObj.targetObject;
+            oceanBase = ((WaterBase) serObj.targetObject).gameObject;
             if (!oceanBase)
                 return;
 
             GUILayout.Label("This script helps adjusting water material properties", EditorStyles.miniBoldLabel);
 
             EditorGUILayout.PropertyField(sharedMaterial, new GUIContent("Material"));
-            oceanMaterial = (Material)sharedMaterial.objectReferenceValue;
+            oceanMaterial = (Material) sharedMaterial.objectReferenceValue;
 
             if (!oceanMaterial)
             {
-                sharedMaterial.objectReferenceValue = (Object)WaterEditorUtility.LocateValidWaterMaterial(oceanBase.transform);
+                sharedMaterial.objectReferenceValue =
+                    (Object) WaterEditorUtility.LocateValidWaterMaterial(oceanBase.transform);
                 serObj.ApplyModifiedProperties();
-                oceanMaterial = (Material)sharedMaterial.objectReferenceValue;
+                oceanMaterial = (Material) sharedMaterial.objectReferenceValue;
                 if (!oceanMaterial)
                     return;
             }
@@ -55,7 +56,7 @@ namespace UnityStandardAssets.Water
             EditorGUILayout.PropertyField(waterQuality, new GUIContent("Quality"));
             EditorGUILayout.PropertyField(edgeBlend, new GUIContent("Edge blend?"));
 
-            if (waterQuality.intValue > (int)WaterQuality.Low)
+            if (waterQuality.intValue > (int) WaterQuality.Low)
                 EditorGUILayout.HelpBox("Water features not supported", MessageType.Warning);
             if (edgeBlend.boolValue && !SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.Depth))
                 EditorGUILayout.HelpBox("Edge blend not supported", MessageType.Warning);
@@ -67,17 +68,27 @@ namespace UnityStandardAssets.Water
             GUILayout.Label("Main Colors", EditorStyles.boldLabel);
             GUILayout.Label("Alpha values define blending with realtime textures", EditorStyles.miniBoldLabel);
 
-            WaterEditorUtility.SetMaterialColor("_BaseColor", EditorGUILayout.ColorField("Refraction", WaterEditorUtility.GetMaterialColor("_BaseColor", oceanMaterial)), oceanMaterial);
-            WaterEditorUtility.SetMaterialColor("_ReflectionColor", EditorGUILayout.ColorField("Reflection", WaterEditorUtility.GetMaterialColor("_ReflectionColor", oceanMaterial)), oceanMaterial);
+            WaterEditorUtility.SetMaterialColor("_BaseColor",
+                EditorGUILayout.ColorField("Refraction",
+                    WaterEditorUtility.GetMaterialColor("_BaseColor", oceanMaterial)), oceanMaterial);
+            WaterEditorUtility.SetMaterialColor("_ReflectionColor",
+                EditorGUILayout.ColorField("Reflection",
+                    WaterEditorUtility.GetMaterialColor("_ReflectionColor", oceanMaterial)), oceanMaterial);
 
             EditorGUILayout.Separator();
 
             GUILayout.Label("Main Textures", EditorStyles.boldLabel);
             GUILayout.Label("Used for small waves (bumps), foam and white caps", EditorStyles.miniBoldLabel);
 
-            WaterEditorUtility.SetMaterialTexture("_BumpMap", (Texture)EditorGUILayout.ObjectField("Normals", WaterEditorUtility.GetMaterialTexture("_BumpMap", waterBase.sharedMaterial), typeof(Texture), false), waterBase.sharedMaterial);
+            WaterEditorUtility.SetMaterialTexture("_BumpMap",
+                (Texture) EditorGUILayout.ObjectField("Normals",
+                    WaterEditorUtility.GetMaterialTexture("_BumpMap", waterBase.sharedMaterial), typeof(Texture),
+                    false), waterBase.sharedMaterial);
             if (hasShore)
-                WaterEditorUtility.SetMaterialTexture("_ShoreTex", (Texture)EditorGUILayout.ObjectField("Shore & Foam", WaterEditorUtility.GetMaterialTexture("_ShoreTex", waterBase.sharedMaterial), typeof(Texture), false), waterBase.sharedMaterial);
+                WaterEditorUtility.SetMaterialTexture("_ShoreTex",
+                    (Texture) EditorGUILayout.ObjectField("Shore & Foam",
+                        WaterEditorUtility.GetMaterialTexture("_ShoreTex", waterBase.sharedMaterial), typeof(Texture),
+                        false), waterBase.sharedMaterial);
 
             Vector4 animationTiling;
             Vector4 animationDirection;
@@ -112,7 +123,8 @@ namespace UnityStandardAssets.Water
             firstDirection = EditorGUILayout.Vector2Field("Direction 1", firstDirection);
             secondDirection = EditorGUILayout.Vector2Field("Direction 2", secondDirection);
 
-            animationTiling = new Vector4(firstTiling.x / 100.0F, firstTiling.y / 100.0F, secondTiling.x / 100.0F, secondTiling.y / 100.0F);
+            animationTiling = new Vector4(firstTiling.x / 100.0F, firstTiling.y / 100.0F, secondTiling.x / 100.0F,
+                secondTiling.y / 100.0F);
             animationDirection = new Vector4(firstDirection.x, firstDirection.y, secondDirection.x, secondDirection.y);
 
             WaterEditorUtility.SetMaterialVector("_BumpTiling", animationTiling, oceanMaterial);
@@ -143,20 +155,22 @@ namespace UnityStandardAssets.Water
             {
                 if (oceanMaterial.HasProperty("_FresnelScale"))
                 {
-                    float fresnelScale = EditorGUILayout.Slider("Intensity", WaterEditorUtility.GetMaterialFloat("_FresnelScale", oceanMaterial), 0.1F, 4.0F);
+                    float fresnelScale = EditorGUILayout.Slider("Intensity",
+                        WaterEditorUtility.GetMaterialFloat("_FresnelScale", oceanMaterial), 0.1F, 4.0F);
                     WaterEditorUtility.SetMaterialFloat("_FresnelScale", fresnelScale, oceanMaterial);
                 }
+
                 displacementParameter.z = EditorGUILayout.Slider("Power", displacementParameter.z, 0.1F, 10.0F);
                 displacementParameter.w = EditorGUILayout.Slider("Bias", displacementParameter.w, -3.0F, 3.0F);
             }
             else
             {
-                Texture fresnelTex = (Texture)EditorGUILayout.ObjectField(
-                        "Ramp",
-                        (Texture)WaterEditorUtility.GetMaterialTexture("_Fresnel",
+                Texture fresnelTex = (Texture) EditorGUILayout.ObjectField(
+                    "Ramp",
+                    (Texture) WaterEditorUtility.GetMaterialTexture("_Fresnel",
                         oceanMaterial),
-                        typeof(Texture),
-                        false);
+                    typeof(Texture),
+                    false);
                 WaterEditorUtility.SetMaterialTexture("_Fresnel", fresnelTex, oceanMaterial);
             }
 
@@ -175,6 +189,7 @@ namespace UnityStandardAssets.Water
 
                 WaterEditorUtility.SetMaterialVector("_InvFadeParemeter", fade, oceanMaterial);
             }
+
             EditorGUILayout.Separator();
 
             if (oceanMaterial.HasProperty("_Foam"))
@@ -191,6 +206,5 @@ namespace UnityStandardAssets.Water
 
             serObj.ApplyModifiedProperties();
         }
-
     }
 }

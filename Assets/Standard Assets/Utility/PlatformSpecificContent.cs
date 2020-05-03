@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace UnityStandardAssets.Utility
@@ -21,14 +22,10 @@ namespace UnityStandardAssets.Utility
             Mobile
         }
 
-        [SerializeField]
-        private BuildTargetGroup m_BuildTargetGroup;
-        [SerializeField]
-        private GameObject[] m_Content = new GameObject[0];
-        [SerializeField]
-        private MonoBehaviour[] m_MonoBehaviours = new MonoBehaviour[0];
-        [SerializeField]
-        private bool m_ChildrenOfThisObject;
+        [SerializeField] private BuildTargetGroup m_BuildTargetGroup;
+        [SerializeField] private GameObject[] m_Content = new GameObject[0];
+        [SerializeField] private MonoBehaviour[] m_MonoBehaviours = new MonoBehaviour[0];
+        [SerializeField] private bool m_ChildrenOfThisObject;
 
 #if !UNITY_EDITOR
 	void OnEnable()
@@ -38,10 +35,7 @@ namespace UnityStandardAssets.Utility
 #else
         public int callbackOrder
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 #endif
 
@@ -106,6 +100,7 @@ namespace UnityStandardAssets.Utility
                     }
                 }
             }
+
             if (m_ChildrenOfThisObject)
             {
                 foreach (Transform t in transform)
@@ -113,6 +108,7 @@ namespace UnityStandardAssets.Utility
                     t.gameObject.SetActive(enabled);
                 }
             }
+
             if (m_MonoBehaviours.Length > 0)
             {
                 foreach (var monoBehaviour in m_MonoBehaviours)

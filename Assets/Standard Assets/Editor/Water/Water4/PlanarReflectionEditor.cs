@@ -41,7 +41,7 @@ namespace UnityStandardAssets.Water
             if (showKidsWithReflectionHint)
             {
                 int i = 0;
-                foreach (Transform t in ((PlanarReflection)target).transform)
+                foreach (Transform t in ((PlanarReflection) target).transform)
                 {
                     if (t.GetComponent<WaterTile>())
                     {
@@ -53,13 +53,14 @@ namespace UnityStandardAssets.Water
                         i = (i + 1) % 2;
                     }
                 }
+
                 if (i > 0)
                     EditorGUILayout.EndHorizontal();
             }
+
             EditorGUILayout.EndToggleGroup();
 
             serObj.ApplyModifiedProperties();
         }
-
     }
 }

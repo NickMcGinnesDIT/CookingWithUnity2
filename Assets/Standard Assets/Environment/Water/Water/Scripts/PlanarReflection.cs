@@ -23,7 +23,7 @@ namespace UnityStandardAssets.Water
 
         public void Start()
         {
-            m_SharedMaterial = ((WaterBase)gameObject.GetComponent(typeof(WaterBase))).sharedMaterial;
+            m_SharedMaterial = ((WaterBase) gameObject.GetComponent(typeof(WaterBase))).sharedMaterial;
         }
 
 
@@ -36,10 +36,12 @@ namespace UnityStandardAssets.Water
             {
                 go = new GameObject(reflName, typeof(Camera));
             }
+
             if (!go.GetComponent(typeof(Camera)))
             {
                 go.AddComponent(typeof(Camera));
             }
+
             Camera reflectCamera = go.GetComponent<Camera>();
 
             reflectCamera.backgroundColor = clearColor;
@@ -84,6 +86,7 @@ namespace UnityStandardAssets.Water
             {
                 m_HelperCameras.Add(currentCam, false);
             }
+
             if (m_HelperCameras[currentCam])
             {
                 return;
@@ -156,12 +159,13 @@ namespace UnityStandardAssets.Water
             {
                 if (cam.gameObject.GetComponent(typeof(Skybox)))
                 {
-                    Skybox sb = (Skybox)reflectCamera.gameObject.GetComponent(typeof(Skybox));
+                    Skybox sb = (Skybox) reflectCamera.gameObject.GetComponent(typeof(Skybox));
                     if (!sb)
                     {
-                        sb = (Skybox)reflectCamera.gameObject.AddComponent(typeof(Skybox));
+                        sb = (Skybox) reflectCamera.gameObject.AddComponent(typeof(Skybox));
                     }
-                    sb.material = ((Skybox)cam.GetComponent(typeof(Skybox))).material;
+
+                    sb.material = ((Skybox) cam.GetComponent(typeof(Skybox))).material;
                 }
             }
 
@@ -219,7 +223,7 @@ namespace UnityStandardAssets.Water
                 Sgn(clipPlane.y),
                 1.0F,
                 1.0F
-                );
+            );
             Vector4 c = clipPlane * (2.0F / (Vector4.Dot(clipPlane, q)));
             // third row = clip plane - fourth row
             projection[2] = c.x - projection[3];
@@ -234,19 +238,19 @@ namespace UnityStandardAssets.Water
         static Matrix4x4 CalculateReflectionMatrix(Matrix4x4 reflectionMat, Vector4 plane)
         {
             reflectionMat.m00 = (1.0F - 2.0F * plane[0] * plane[0]);
-            reflectionMat.m01 = (- 2.0F * plane[0] * plane[1]);
-            reflectionMat.m02 = (- 2.0F * plane[0] * plane[2]);
-            reflectionMat.m03 = (- 2.0F * plane[3] * plane[0]);
+            reflectionMat.m01 = (-2.0F * plane[0] * plane[1]);
+            reflectionMat.m02 = (-2.0F * plane[0] * plane[2]);
+            reflectionMat.m03 = (-2.0F * plane[3] * plane[0]);
 
-            reflectionMat.m10 = (- 2.0F * plane[1] * plane[0]);
+            reflectionMat.m10 = (-2.0F * plane[1] * plane[0]);
             reflectionMat.m11 = (1.0F - 2.0F * plane[1] * plane[1]);
-            reflectionMat.m12 = (- 2.0F * plane[1] * plane[2]);
-            reflectionMat.m13 = (- 2.0F * plane[3] * plane[1]);
+            reflectionMat.m12 = (-2.0F * plane[1] * plane[2]);
+            reflectionMat.m13 = (-2.0F * plane[3] * plane[1]);
 
-            reflectionMat.m20 = (- 2.0F * plane[2] * plane[0]);
-            reflectionMat.m21 = (- 2.0F * plane[2] * plane[1]);
+            reflectionMat.m20 = (-2.0F * plane[2] * plane[0]);
+            reflectionMat.m21 = (-2.0F * plane[2] * plane[1]);
             reflectionMat.m22 = (1.0F - 2.0F * plane[2] * plane[2]);
-            reflectionMat.m23 = (- 2.0F * plane[3] * plane[2]);
+            reflectionMat.m23 = (-2.0F * plane[3] * plane[2]);
 
             reflectionMat.m30 = 0.0F;
             reflectionMat.m31 = 0.0F;
@@ -263,10 +267,12 @@ namespace UnityStandardAssets.Water
             {
                 return 1.0F;
             }
+
             if (a < 0.0F)
             {
                 return -1.0F;
             }
+
             return 0.0F;
         }
 

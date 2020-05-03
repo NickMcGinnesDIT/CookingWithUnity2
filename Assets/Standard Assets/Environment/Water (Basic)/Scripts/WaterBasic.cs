@@ -13,6 +13,7 @@ namespace UnityStandardAssets.Water
             {
                 return;
             }
+
             Material mat = r.sharedMaterial;
             if (!mat)
             {

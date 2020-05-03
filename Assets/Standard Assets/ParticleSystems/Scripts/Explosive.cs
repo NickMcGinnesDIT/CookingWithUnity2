@@ -39,7 +39,7 @@ namespace UnityStandardAssets.Effects
                         if (!m_Exploded)
                         {
                             Instantiate(explosionPrefab, col.contacts[0].point,
-                                        Quaternion.LookRotation(col.contacts[0].normal));
+                                Quaternion.LookRotation(col.contacts[0].normal));
                             m_Exploded = true;
 
                             SendMessage("Immobilize");

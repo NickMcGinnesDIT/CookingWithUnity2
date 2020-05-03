@@ -30,11 +30,12 @@ namespace UnityStandardAssets.Utility
             RaycastHit hit = new RaycastHit();
             if (
                 !Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition).origin,
-                                 mainCamera.ScreenPointToRay(Input.mousePosition).direction, out hit, 100,
-                                 Physics.DefaultRaycastLayers))
+                    mainCamera.ScreenPointToRay(Input.mousePosition).direction, out hit, 100,
+                    Physics.DefaultRaycastLayers))
             {
                 return;
             }
+
             // We need to hit a rigidbody that is not kinematic
             if (!hit.rigidbody || hit.rigidbody.isKinematic)
             {
@@ -74,6 +75,7 @@ namespace UnityStandardAssets.Utility
                 m_SpringJoint.transform.position = ray.GetPoint(distance);
                 yield return null;
             }
+
             if (m_SpringJoint.connectedBody)
             {
                 m_SpringJoint.connectedBody.drag = oldDrag;

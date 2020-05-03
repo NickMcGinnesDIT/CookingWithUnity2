@@ -10,6 +10,7 @@ TagManager:
   - Red
   - Blue
   - Green
+  - World
   layers:
   - Default
   - TransparentFX

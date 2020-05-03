@@ -19,8 +19,8 @@ namespace UnityStandardAssets.Water
         {
             serObj.Update();
 
-            GameObject go = ((SpecularLighting)serObj.targetObject).gameObject;
-            WaterBase wb = (WaterBase)go.GetComponent(typeof(WaterBase));
+            GameObject go = ((SpecularLighting) serObj.targetObject).gameObject;
+            WaterBase wb = (WaterBase) go.GetComponent(typeof(WaterBase));
 
             if (!wb.sharedMaterial)
                 return;
@@ -34,7 +34,7 @@ namespace UnityStandardAssets.Water
                     WaterEditorUtility.SetMaterialColor(
                         "_SpecularColor",
                         EditorGUILayout.ColorField("Specular",
-                        WaterEditorUtility.GetMaterialColor("_SpecularColor", wb.sharedMaterial)),
+                            WaterEditorUtility.GetMaterialColor("_SpecularColor", wb.sharedMaterial)),
                         wb.sharedMaterial);
                 if (wb.sharedMaterial.HasProperty("_Shininess"))
                     WaterEditorUtility.SetMaterialFloat("_Shininess", EditorGUILayout.Slider(
@@ -43,10 +43,10 @@ namespace UnityStandardAssets.Water
                         0.0F, 500.0F), wb.sharedMaterial);
             }
             else
-                GUILayout.Label("The shader doesn't have the needed _WorldLightDir property.", EditorStyles.miniBoldLabel);
+                GUILayout.Label("The shader doesn't have the needed _WorldLightDir property.",
+                    EditorStyles.miniBoldLabel);
 
             serObj.ApplyModifiedProperties();
         }
-
     }
 }

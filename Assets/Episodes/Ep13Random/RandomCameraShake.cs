@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class RandomCameraShake : MonoBehaviour
 {
-	public Vector3 OriginalPosition;
-	public float Intensity = 1f;
+    public Vector3 OriginalPosition;
+
+    public float Intensity = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
-		OriginalPosition = transform.position;
+        OriginalPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-		transform.position = OriginalPosition + (Random.insideUnitSphere * Intensity);
+        transform.position = OriginalPosition + (Random.insideUnitSphere * Intensity);
     }
 }
