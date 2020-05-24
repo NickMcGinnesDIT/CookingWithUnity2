@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ep03ChangeScoreOnCollide : MonoBehaviour
+namespace Episodes.Ep01SpaceInvaders.Scripts
 {
-    public int pointValue = 1;
-
-    private void OnCollisionEnter(Collision collision)
+    public class ep03ChangeScoreOnCollide : MonoBehaviour
     {
-        ep03GameManager.Score += pointValue;
+        public int pointValue = 1;
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            ep03GameManager.Score += pointValue;
+        }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Episodes.Ep08TowerDefence
+namespace CookingWithUnity2.Episodes.Ep08TowerDefence
 {
     public class Ep09BasicEnemy : MonoBehaviour
     {

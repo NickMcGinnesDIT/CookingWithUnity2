@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Ep05EnableCollisionAndChangeMaterial : MonoBehaviour
+namespace Episodes.Ep04FPPuzzle
 {
-    public Material ActiveMaterial;
-    private Material InactiveMaterial;
-
-
-    private void Start()
+    public class Ep05EnableCollisionAndChangeMaterial : MonoBehaviour
     {
-        InactiveMaterial = GetComponent<Renderer>().material;
-    }
+        public Material ActiveMaterial;
+        private Material InactiveMaterial;
 
-    void ObjectActivate()
-    {
-        GetComponent<Collider>().enabled = true;
-        GetComponent<Renderer>().material = ActiveMaterial;
-    }
 
-    void ObjectDeactivate()
-    {
-        GetComponent<Collider>().enabled = false;
-        GetComponent<Renderer>().material = InactiveMaterial;
+        private void Start()
+        {
+            InactiveMaterial = GetComponent<Renderer>().material;
+        }
+
+        void ObjectActivate()
+        {
+            GetComponent<Collider>().enabled = true;
+            GetComponent<Renderer>().material = ActiveMaterial;
+        }
+
+        void ObjectDeactivate()
+        {
+            GetComponent<Collider>().enabled = false;
+            GetComponent<Renderer>().material = InactiveMaterial;
+        }
     }
 }

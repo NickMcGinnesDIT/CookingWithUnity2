@@ -1,11 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ep03GameOverOnCollide : MonoBehaviour
+namespace Episodes.Ep01SpaceInvaders.Scripts
 {
-    private void OnCollisionEnter(Collision collision)
+    public class ep03GameOverOnCollide : MonoBehaviour
     {
-        ep03GameManager.GameOver = true;
+        private void OnCollisionEnter(Collision collision)
+        {
+            ep03GameManager.GameOver = true;
+        }
     }
 }

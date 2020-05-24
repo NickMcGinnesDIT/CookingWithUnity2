@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RandomPositionOnSphere : MonoBehaviour
+namespace Episodes.Ep13Random
 {
-    public float SphereSize = 10f;
-
-    public int Seed = 0;
-
-    // Start is called before the first frame update
-    void Start()
+    public class RandomPositionOnSphere : MonoBehaviour
     {
-    }
+        public float SphereSize = 10f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Random.seed = Seed;
+        public int Seed = 0;
 
-        foreach (GameObject cu in GameObject.FindGameObjectsWithTag("Cube"))
+        // Start is called before the first frame update
+        void Start()
         {
-            cu.transform.position = Random.onUnitSphere * SphereSize;
-            //cu.transform.localScale = new Vector3(1, Random.value * MaxHeight, 1);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            //Random.seed = Seed;
+
+            foreach (GameObject cu in GameObject.FindGameObjectsWithTag("Cube"))
+            {
+                cu.transform.position = Random.onUnitSphere * SphereSize;
+                //cu.transform.localScale = new Vector3(1, Random.value * MaxHeight, 1);
+            }
         }
     }
 }

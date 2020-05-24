@@ -1,38 +1,41 @@
 ﻿using UnityEngine;
 
-public class Ep05ActiveateBridge : MonoBehaviour
+namespace Episodes.Ep04FPPuzzle
 {
-    public GameObject Bridge;
-    public GameObject Key;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Ep05ActiveateBridge : MonoBehaviour
     {
-    }
+        public GameObject Bridge;
+        public GameObject Key;
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag(gameObject.tag))
+        // Start is called before the first frame update
+        void Start()
         {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag(gameObject.tag))
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(gameObject.tag))
             {
-                obj.SendMessage("ObjectActivate", SendMessageOptions.DontRequireReceiver);
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag(gameObject.tag))
+                {
+                    obj.SendMessage("ObjectActivate", SendMessageOptions.DontRequireReceiver);
+                }
             }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(gameObject.tag))
+        private void OnTriggerExit(Collider other)
         {
-            foreach (GameObject obj in GameObject.FindGameObjectsWithTag(gameObject.tag))
+            if (other.CompareTag(gameObject.tag))
             {
-                obj.SendMessage("ObjectDeactivate", SendMessageOptions.DontRequireReceiver);
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag(gameObject.tag))
+                {
+                    obj.SendMessage("ObjectDeactivate", SendMessageOptions.DontRequireReceiver);
+                }
             }
         }
     }

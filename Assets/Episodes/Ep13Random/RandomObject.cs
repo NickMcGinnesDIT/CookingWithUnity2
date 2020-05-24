@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RandomObject : MonoBehaviour
+namespace Episodes.Ep13Random
 {
-    public GameObject[] thingies;
-    public Material[] mats;
-    public float spawnDelay = 5f;
-
-    // Start is called before the first frame update
-    void Start()
+    public class RandomObject : MonoBehaviour
     {
-        InvokeRepeating("SpawnThing", 1f, spawnDelay);
-    }
+        public GameObject[] thingies;
+        public Material[] mats;
+        public float spawnDelay = 5f;
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            InvokeRepeating("SpawnThing", 1f, spawnDelay);
+        }
 
-    void SpawnThing()
-    {
-        GameObject cu = Instantiate(thingies[Random.Range(0, thingies.Length)], transform.position, transform.rotation);
-        cu.gameObject.GetComponent<Renderer>().material = mats[Random.Range(0, mats.Length)];
+        // Update is called once per frame
+        void Update()
+        {
+        }
+
+        void SpawnThing()
+        {
+            GameObject cu = Instantiate(thingies[Random.Range(0, thingies.Length)], transform.position, transform.rotation);
+            cu.gameObject.GetComponent<Renderer>().material = mats[Random.Range(0, mats.Length)];
+        }
     }
 }

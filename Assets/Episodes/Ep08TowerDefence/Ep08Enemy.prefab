@@ -107,9 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathPoints: []
-  speed: 1
-  goalSize: 0.1
-  graphicalPathObject: {fileID: 0}
+  speed: 2.5
 --- !u!54 &4130255122600343519
 Rigidbody:
   m_ObjectHideFlags: 0

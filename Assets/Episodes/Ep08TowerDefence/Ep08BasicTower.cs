@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Episodes.Ep08TowerDefence
+namespace CookingWithUnity2.Episodes.Ep08TowerDefence
 {
     public class Ep08BasicTower : MonoBehaviour
     {

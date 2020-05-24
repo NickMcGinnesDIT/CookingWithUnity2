@@ -402,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 3430403157291819760, guid: fcd2e5643bafa484a944233dcd289b11,
         type: 3}
       propertyPath: m_Name
-      value: Ep08Waypoint (2)
+      value: PlayerBase
       objectReference: {fileID: 0}
     - target: {fileID: 3430403157291819764, guid: fcd2e5643bafa484a944233dcd289b11,
         type: 3}
@@ -619,6 +619,65 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3430403158602944744}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2002292757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2002292758}
+  - component: {fileID: 2002292759}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2002292758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002292757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28.81, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2002292759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002292757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9325b99920a56b443a19c7d2bd47564d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPoints:
+  - {fileID: 1915351576}
+  - {fileID: 1136928310}
+  - {fileID: 561022843}
+  spawnList:
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  - {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f, type: 3}
+  spawnTime: 10
+  graphicalPathObject: {fileID: 1339871642755078397, guid: 3a1a3c1c93953d846bc4b86b7eba127c,
+    type: 3}
 --- !u!1001 &2169512790157701840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -774,6 +833,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ep08Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130255122600343513, guid: b38d56c75156d1f409c319a690304a1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4130255122600343517, guid: b38d56c75156d1f409c319a690304a1f,
         type: 3}

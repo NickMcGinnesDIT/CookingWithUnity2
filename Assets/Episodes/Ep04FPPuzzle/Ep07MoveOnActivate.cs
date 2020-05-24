@@ -1,66 +1,68 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Ep07MoveOnActivate : MonoBehaviour
+namespace Episodes.Ep04FPPuzzle
 {
-    public Vector3 MovementVector;
-    public float MovementTime = 2f;
-
-    private Vector3 _startPosition;
-    private bool _canMove = false;
-
-    private bool reverse = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Ep07MoveOnActivate : MonoBehaviour
     {
-        _startPosition = transform.position;
-        StartCoroutine(MoveOverTime());
-    }
+        public Vector3 MovementVector;
+        public float MovementTime = 2f;
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+        private Vector3 _startPosition;
+        private bool _canMove = false;
 
-    void ObjectActivate()
-    {
-        _canMove = true;
-    }
+        private bool reverse = false;
 
-    void ObjectDeactivate()
-    {
-        _canMove = false;
-    }
-
-    IEnumerator MoveOverTime()
-    {
-        float timer = 0;
-
-        while (true)
+        // Start is called before the first frame update
+        void Start()
         {
-            if (_canMove)
+            _startPosition = transform.position;
+            StartCoroutine(MoveOverTime());
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+        }
+
+        void ObjectActivate()
+        {
+            _canMove = true;
+        }
+
+        void ObjectDeactivate()
+        {
+            _canMove = false;
+        }
+
+        IEnumerator MoveOverTime()
+        {
+            float timer = 0;
+
+            while (true)
             {
-                if (!reverse)
+                if (_canMove)
                 {
-                    timer += Time.deltaTime;
-                }
-                else
-                {
-                    timer -= Time.deltaTime;
+                    if (!reverse)
+                    {
+                        timer += Time.deltaTime;
+                    }
+                    else
+                    {
+                        timer -= Time.deltaTime;
+                    }
+
+                    if (timer > MovementTime && !reverse)
+                        reverse = true;
+                    if (timer < 0f && reverse)
+                        reverse = false;
+
+                    transform.position =
+                        Vector3.Lerp(_startPosition, _startPosition + MovementVector, timer / MovementTime);
                 }
 
-                if (timer > MovementTime && !reverse)
-                    reverse = true;
-                if (timer < 0f && reverse)
-                    reverse = false;
-
-                transform.position =
-                    Vector3.Lerp(_startPosition, _startPosition + MovementVector, timer / MovementTime);
+                yield return null;
             }
-
-            yield return null;
         }
     }
 }
